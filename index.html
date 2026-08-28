@@ -1,0 +1,729 @@
+# monthsary-letter
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Langga 💌</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pink: #e889a8;
+  --light-pink: #ffdce8;
+  --soft-pink: #fff0f5;
+  --cream: #fffaf7;
+  --brown: #704c58;
+  --dark-pink: #b85f7e;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "DM Sans", sans-serif;
+  color: var(--brown);
+
+  background:
+    radial-gradient(circle at 15% 15%, #ffffff 0%, transparent 25%),
+    radial-gradient(circle at 85% 80%, #ffd5e4 0%, transparent 30%),
+    linear-gradient(135deg, #ffe8f0, #fff8f5, #fbd9e5);
+}
+
+/* ---------------- BACKGROUND ---------------- */
+
+.bg-heart {
+  position: fixed;
+  color: rgba(216, 115, 150, .25);
+  font-size: 25px;
+  animation: float 7s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-15vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ---------------- MAIN ---------------- */
+
+.container {
+  width: min(650px, 92%);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 7vw, 52px);
+  font-weight: 700;
+  color: #9d526f;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #9f7885;
+  margin-bottom: 25px;
+}
+
+/* ---------------- CARD ---------------- */
+
+.card {
+  background: rgba(255, 250, 247, .78);
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 28px;
+  padding: 30px 22px;
+  box-shadow:
+    0 20px 60px rgba(160, 91, 115, .18),
+    inset 0 0 25px rgba(255,255,255,.7);
+  backdrop-filter: blur(15px);
+}
+
+/* ---------------- PASSWORD ---------------- */
+
+.gate {
+  transition: .5s ease;
+}
+
+.lock-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.gate h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 29px;
+  color: #9d526f;
+  margin-bottom: 6px;
+}
+
+.gate p {
+  font-size: 13px;
+  color: #9f7885;
+  margin-bottom: 18px;
+}
+
+.input-row {
+  display: flex;
+  gap: 9px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+input {
+  width: min(320px, 100%);
+  padding: 13px 16px;
+  border: 1px solid #efc3d1;
+  border-radius: 14px;
+  outline: none;
+  background: rgba(255,255,255,.7);
+  color: var(--brown);
+  font-size: 15px;
+  text-align: center;
+}
+
+input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(232,137,168,.12);
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #e889a8, #d87598);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(200, 100, 135, .25);
+  transition: .2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.message {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #b85f7e;
+}
+
+/* ---------------- ENVELOPE ---------------- */
+
+.envelope-wrapper {
+  display: none;
+  perspective: 1000px;
+}
+
+.envelope {
+  width: min(420px, 90vw);
+  height: 260px;
+  margin: 15px auto 25px;
+  position: relative;
+  cursor: pointer;
+  filter: drop-shadow(0 18px 20px rgba(160, 80, 110, .18));
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: #f4a9bf;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.envelope-body::before,
+.envelope-body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.envelope-body::before {
+  left: 0;
+  border-width: 130px 210px 0 0;
+  border-color: #e995b0 transparent transparent transparent;
+}
+
+.envelope-body::after {
+  right: 0;
+  border-width: 0 0 130px 210px;
+  border-color: transparent transparent #e995b0 transparent;
+}
+
+/* Letter inside */
+
+.letter {
+  position: absolute;
+  width: 86%;
+  height: 210px;
+  left: 7%;
+  bottom: 8px;
+  background: #fffdfb;
+  border-radius: 5px;
+  padding: 22px;
+  box-shadow: 0 5px 15px rgba(100,50,70,.12);
+  transition: transform 1s cubic-bezier(.2,.8,.2,1);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.letter h2 {
+  font-family: "Cormorant Garamond", serif;
+  color: #a95372;
+  font-size: 27px;
+  margin-bottom: 5px;
+}
+
+.letter p {
+  font-size: 12px;
+  color: #7c626b;
+}
+
+.flap {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 145px;
+  background: #f7b5c9;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 1s cubic-bezier(.2,.8,.2,1);
+  z-index: 4;
+}
+
+.seal {
+  position: absolute;
+  z-index: 5;
+  top: 105px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background: #c86789;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  box-shadow: 0 5px 15px rgba(160,70,100,.25);
+  transition: .6s;
+}
+
+/* Opening */
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-130px);
+}
+
+.envelope.open .seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(.5);
+}
+
+/* ---------------- ACTUAL LETTER ---------------- */
+
+.full-letter {
+  display: none;
+  text-align: left;
+  background: #fffdfb;
+  border-radius: 22px;
+  padding: 30px 25px;
+  box-shadow: inset 0 0 35px rgba(255, 220, 230, .35);
+  animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ribbon {
+  text-align: center;
+  color: #c36787;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.full-letter h1 {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px;
+  color: #a95372;
+  margin-bottom: 20px;
+}
+
+.full-letter p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.signature {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px dashed #e5b5c5;
+  text-align: right;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 21px;
+  color: #a95372;
+}
+
+.final-heart {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 20px;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ---------------- SPARKLES ---------------- */
+
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 14px;
+  animation: sparkle 1.5s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(.3) rotate(0);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.4) rotate(90deg) translateY(-25px);
+  }
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media(max-width:520px) {
+  .card {
+    padding: 23px 15px;
+  }
+
+  .envelope {
+    height: 220px;
+  }
+
+  .envelope-body::before {
+    border-width: 110px 170px 0 0;
+  }
+
+  .envelope-body::after {
+    border-width: 0 0 110px 170px;
+  }
+
+  .letter {
+    height: 180px;
+  }
+
+  .flap {
+    height: 120px;
+  }
+
+  .seal {
+    top: 88px;
+  }
+
+  .envelope.open .letter {
+    transform: translateY(-105px);
+  }
+
+  .full-letter {
+    padding: 25px 20px;
+  }
+
+  .full-letter p {
+    font-size: 18px;
+  }
+
+  .input-row button,
+  .input-row input {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<div class="bg-heart" style="left:8%; animation-delay:0s;">♡</div>
+<div class="bg-heart" style="left:20%; animation-delay:2s;">♥</div>
+<div class="bg-heart" style="left:35%; animation-delay:4s;">♡</div>
+<div class="bg-heart" style="left:55%; animation-delay:1s;">♥</div>
+<div class="bg-heart" style="left:70%; animation-delay:3s;">♡</div>
+<div class="bg-heart" style="left:88%; animation-delay:5s;">♥</div>
+
+<div class="container">
+
+  <div class="title">For My Langga 🎀</div>
+  <div class="subtitle">a tiny little surprise made with love ♡</div>
+
+  <div class="card">
+
+    <!-- PASSWORD -->
+    <div id="gate" class="gate">
+
+      <div class="lock-icon">💌</div>
+
+      <h2>A Secret Letter</h2>
+
+      <p>
+        There's something waiting inside just for you...
+      </p>
+
+      <div class="input-row">
+        <input
+          id="pwd"
+          type="password"
+          placeholder="enter the secret password ♡"
+          autocomplete="off"
+        >
+
+        <button id="unlockBtn">
+          Open 💗
+        </button>
+      </div>
+
+      <div id="msg" class="message"></div>
+
+    </div>
+
+
+    <!-- ENVELOPE -->
+    <div id="envelopeWrapper" class="envelope-wrapper">
+
+      <div id="envelope" class="envelope">
+
+        <div class="envelope-body"></div>
+
+        <div class="letter">
+          <h2>Happy Monthsary! ♡</h2>
+          <p>A little letter for my favorite person...</p>
+        </div>
+
+        <div class="flap"></div>
+
+        <div class="seal">♥</div>
+
+      </div>
+
+      <p style="font-size:13px;color:#a47785;">
+        tap the envelope to open it 🎀
+      </p>
+
+    </div>
+
+
+    <!-- FULL LETTER -->
+    <div id="fullLetter" class="full-letter">
+
+      <div class="ribbon">
+        ♡　WITH ALL MY LOVE　♡
+      </div>
+
+      <h1>Happy Monthsary, Langga! 💗</h1>
+
+      <p>
+        I hope ur doing well right neowww! 🥺
+      </p>
+
+      <p>
+        I just want you to know how grateful I am to have you in my life.
+        Thank you for all the little things you do, for making me smile,
+        and for being someone I can cherish every single day.
+      </p>
+
+      <p>
+        I hope we continue making more memories together, supporting each
+        other through everything, and growing together. No matter what
+        happens, I hope you always remember how special and loved you are
+        to me.
+      </p>
+
+      <p>
+        You deserve all the love, happiness, and good things in the world.
+        And I hope I can keep reminding you of that in all the little ways
+        I can. ♡
+      </p>
+
+      <p>
+        I love you always and forever. 💗
+      </p>
+
+      <div class="signature">
+        your dearest,<br>
+        <strong>Debi :></strong>
+      </div>
+
+      <div class="final-heart">
+        ♡
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ---------------- PASSWORD ---------------- */
+
+const PASSWORD = "love123";
+
+const gate = document.getElementById("gate");
+const pwd = document.getElementById("pwd");
+const unlockBtn = document.getElementById("unlockBtn");
+const msg = document.getElementById("msg");
+
+const envelopeWrapper =
+  document.getElementById("envelopeWrapper");
+
+const envelope =
+  document.getElementById("envelope");
+
+const fullLetter =
+  document.getElementById("fullLetter");
+
+
+function unlock() {
+
+  const value = pwd.value.trim();
+
+  if (!value) {
+    msg.textContent = "Enter the password first, langga ♡";
+    return;
+  }
+
+  if (value === PASSWORD) {
+
+    msg.textContent = "You got it! 💗";
+
+    setTimeout(() => {
+
+      gate.style.display = "none";
+      envelopeWrapper.style.display = "block";
+
+      createSparkles();
+
+    }, 700);
+
+  } else {
+
+    msg.textContent = "Hmmmm... wrong password 💔";
+
+    pwd.value = "";
+
+    pwd.focus();
+  }
+}
+
+
+unlockBtn.addEventListener("click", unlock);
+
+pwd.addEventListener("keydown", function(e) {
+
+  if (e.key === "Enter") {
+    unlock();
+  }
+
+});
+
+
+/* ---------------- ENVELOPE OPENING ---------------- */
+
+envelope.addEventListener("click", function() {
+
+  if (envelope.classList.contains("open")) return;
+
+  envelope.classList.add("open");
+
+  createSparkles();
+
+  setTimeout(() => {
+
+    envelopeWrapper.style.display = "none";
+
+    fullLetter.style.display = "block";
+
+    createSparkles();
+
+  }, 1700);
+
+});
+
+
+/* ---------------- SPARKLES ---------------- */
+
+function createSparkles() {
+
+  const symbols = ["✦", "✧", "♡", "⋆", "✿"];
+
+  for (let i = 0; i < 18; i++) {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    sparkle.style.left =
+      Math.random() * 100 + "vw";
+
+    sparkle.style.top =
+      Math.random() * 100 + "vh";
+
+    sparkle.style.animationDelay =
+      Math.random() * .7 + "s";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+      sparkle.remove();
+    }, 2200);
+
+  }
+
+}
+
+
+/* ---------------- EXTRA FLOATING HEARTS ---------------- */
+
+setInterval(() => {
+
+  const heart = document.createElement("div");
+
+  heart.className = "bg-heart";
+
+  heart.textContent =
+    Math.random() > .5 ? "♡" : "♥";
+
+  heart.style.left =
+    Math.random() * 100 + "%";
+
+  heart.style.fontSize =
+    (14 + Math.random() * 20) + "px";
+
+  heart.style.animationDuration =
+    (5 + Math.random() * 5) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 10000);
+
+}, 1200);
+
+</script>
+
+</body>
+</html>
